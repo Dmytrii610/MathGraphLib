@@ -55,6 +55,27 @@ namespace MathGraphLib
             head[source.Id] = edgeCount;
             edgeCount++;
         }
+        public void AddUndirectedEdge(Node nodeA, Node nodeB, TEdgeData data)
+        {
+            if(edgeCount + 1 >= destination.Length)
+            {
+                int newSize = destination.Length * 2;
+                Array.Resize(ref destination, newSize);
+                Array.Resize(ref edgeData, newSize);
+                Array.Resize(ref next, newSize);
+            }
+            int edgeId1 = edgeCount++;
+            destination[edgeId1] = nodeB.Id;
+            edgeData[edgeId1] = data;
+            next[edgeId1] = head[nodeA.Id];
+            head[nodeA.Id] = edgeId1;
+
+            int edgeId2 = edgeCount++;
+            destination[edgeId2] = nodeA.Id;
+            edgeData[edgeId2] = data;
+            next[edgeId2] = head[nodeB.Id];
+            head[nodeB.Id] = edgeId2;
+        }
         public ref TNodeData GetNodeData(Node node)
         {
             return ref nodes[node.Id];
