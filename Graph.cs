@@ -11,13 +11,13 @@ namespace MathGraphLib
         internal readonly int Id;
         internal Node(int id) => Id = id;
     }
-    public struct OutBoundedEdgeEnumerator
+    public struct OutboundedEdgeEnumerator
     {
         private readonly int[] next;
         private int currentEdgeId;
         private int nextEdgeId;
 
-        public OutBoundedEdgeEnumerator(int startEdge, int[] next)
+        public OutboundedEdgeEnumerator(int startEdge, int[] next)
         {
             this.next = next;
             currentEdgeId = -1;
@@ -103,7 +103,11 @@ namespace MathGraphLib
         {
             return ref nodes[node.Id];
         }
-
+        public OutboundedEdgeEnumerator GetOutboundedEdges(Node node)
+        {
+            int startId = head[node.Id];
+            return new OutboundedEdgeEnumerator(startId, next);
+        }
     }
     public class Graph
     {
