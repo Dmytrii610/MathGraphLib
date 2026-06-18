@@ -1,4 +1,5 @@
 ﻿using System.Reflection.Metadata.Ecma335;
+using System.Xml;
 
 namespace MathGraphLib
 {
@@ -9,6 +10,28 @@ namespace MathGraphLib
     {
         internal readonly int Id;
         internal Node(int id) => Id = id;
+    }
+    public struct OutBoundedEdgeEnumerator
+    {
+        private readonly int[] next;
+        private int currentEdgeId;
+        private int nextEdgeId;
+
+        public OutBoundedEdgeEnumerator(int startEdge, int[] next)
+        {
+            this.next = next;
+            currentEdgeId = -1;
+            nextEdgeId = startEdge;
+        }
+        public int Current => currentEdgeId;
+        public bool MoveNext()
+        {
+            if (nextEdgeId == -1) return false;
+            currentEdgeId = nextEdgeId;
+            nextEdgeId = next[currentEdgeId];
+            return true;
+        }
+
     }
     public class FastGraph<TNodeData,TEdgeData>
     {
