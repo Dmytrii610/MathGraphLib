@@ -41,7 +41,7 @@ namespace MathGraphLib
             nodes[nodeCount] = node;
             return new Node(nodeCount++);
         }
-        public void AddEdge(Node source, Node target, TEdgeData data)
+        public void AddDirectedEdge(Node source, Node target, TEdgeData data)
         {
             if (edgeCount >= destination.Length)
             {
@@ -58,7 +58,8 @@ namespace MathGraphLib
         public ref TNodeData GetNodeData(Node node)
         {
             return ref nodes[node.Id];
-        } 
+        }
+
     }
     public class Graph
     {
