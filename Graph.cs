@@ -1,7 +1,4 @@
-﻿using System.Reflection.Metadata.Ecma335;
-using System.Xml;
-
-namespace MathGraphLib
+﻿namespace MathGraphLib
 {
     /// <summary>
     /// Structure which represents a Node in Graph Data Structure
@@ -11,6 +8,9 @@ namespace MathGraphLib
         internal readonly int Id;
         internal Node(int id) => Id = id;
     }
+    /// <summary>
+    /// Structure which represents a Enumerator for FastGraph class
+    /// </summary>
     public struct OutboundedEdgeEnumerator
     {
         private readonly int[] next;
@@ -38,11 +38,11 @@ namespace MathGraphLib
         private TNodeData[] nodes;
         private TEdgeData[] edgeData;
         private int[] destination;
-        private int[] head; // head - dla każdego węzła przechowujemy indeks pierwszej wychodzącej krawędzi.
-        private int[] next; // next - tablica, wskazująca na kolejne krawędzie.
+        private int[] head; 
+        private int[] next; 
         private int nodeCount;
         private int edgeCount;
-
+         
         public FastGraph()
         {
             nodes = new TNodeData[16];
@@ -59,7 +59,7 @@ namespace MathGraphLib
                 int size = nodes.Length;
                 Array.Resize(ref nodes, size * 2);
                 Array.Resize(ref head, size * 2);
-                Array.Fill(head, -1, nodeCount, size - nodeCount);
+                Array.Fill(head, -1, nodeCount, head.Length - nodeCount);
             }
             nodes[nodeCount] = node;
             return new Node(nodeCount++);
