@@ -42,7 +42,9 @@
         private int[] next; 
         private int nodeCount;
         private int edgeCount;
-         
+
+        public int NodeCount => nodeCount;
+        public int EdgeCount => edgeCount;
         public FastGraph()
         {
             nodes = new TNodeData[16];
@@ -108,9 +110,13 @@
             int startId = head[node.Id];
             return new OutboundedEdgeEnumerator(startId, next);
         }
-    }
-    public class Graph
-    {
-
+        public Node GetEdgeTarget(int edgeId)
+        {
+            return new Node(destination[edgeId]);
+        }
+        public ref TEdgeData GetEdgeData(int edgeId) 
+        {
+            return ref edgeData[edgeId];
+        }
     }
 }
