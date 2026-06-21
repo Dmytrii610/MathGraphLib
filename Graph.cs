@@ -7,6 +7,8 @@
     {
         internal readonly int Id;
         internal Node(int id) => Id = id;
+        public override bool Equals(object obj) => obj is Node n && n.Id == Id;
+        public override int GetHashCode() => Id;
     }
     /// <summary>
     /// Structure which represents a Enumerator for FastGraph class
